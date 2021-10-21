@@ -8,9 +8,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
-    // 'react',
     'react-hooks',
-    // 'jsx-a11y',
   ],
   extends: [
     'eslint:recommended',
