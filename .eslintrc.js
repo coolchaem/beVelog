@@ -1,32 +1,33 @@
 module.exports = {
+  env: {
+    node: true, // to fix 'module' is not defined.eslintno-undef
+  },
   settings: {
     react: {
       version: 'detect',
-    }
+    },
   },
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: [
-    '@typescript-eslint',
-    'react-hooks',
-  ],
+  plugins: ['@typescript-eslint', 'react-hooks'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
-    'ecmaFeatures': {
-      'jsx': true
-    }
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   rules: {
-    'quotes': ['error', 'single', { 'avoidEscape': true }],
-    'indent': ['error', 2],
+    quotes: ['error', 'single', { avoidEscape: true }],
+    indent: ['error', 2],
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
-    'prettier/prettier': ['error', { 'singleQuote': true }]
-  }
+    'prettier/prettier': ['error', { singleQuote: true, endOfLine: 'auto' }],
+    '@typescript-eslint/no-var-requires': false, // to fix Require statement not part of import statement
+  },
 };
