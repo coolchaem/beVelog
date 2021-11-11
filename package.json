@@ -23,12 +23,24 @@
     "test:watch": "npm run test -- --watch",
     "eject": "react-scripts eject",
     "serve": "webpack serve --config ./conf/webpack.development.conf.js",
-    "build": "webpack --config ./conf/webpack.production.conf.js"
+    "build": "webpack --config ./conf/webpack.production.conf.js",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -50,12 +62,22 @@
     "@babel/preset-typescript": "^7.16.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@storybook/addon-actions": "^6.4.0-beta.31",
+    "@storybook/addon-essentials": "^6.4.0-beta.31",
+    "@storybook/addon-links": "^6.4.0-beta.31",
+    "@storybook/builder-webpack5": "^6.4.0-beta.31",
+    "@storybook/manager-webpack5": "^6.4.0-beta.31",
+    "@storybook/node-logger": "^6.4.0-beta.31",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.4.0-beta.31",
     "@testing-library/react": "^11.2.7",
     "@types/lodash": "^4.14.175",
     "@types/react-router-dom": "^5.3.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "babel-jest": "^27.3.1",
+    "css-loader": "^6.5.1",
+    "dotenv-webpack": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
@@ -72,9 +94,12 @@
     "react-test-renderer": "^17.0.2",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.0",
+    "terser-webpack-plugin": "^5.2.5",
     "ts-loader": "^9.2.6",
-    "webpack": "^5.59.0",
+    "webpack": "^5.63.0",
     "webpack-cli": "^4.9.1",
-    "webpack-merge": "^5.8.0"
+    "webpack-dev-middleware": "^5.2.1",
+    "webpack-merge": "^5.8.0",
+    "webpack-virtual-modules": "^0.4.3"
   }
 }
