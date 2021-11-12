@@ -27,7 +27,8 @@
     "serve": "webpack serve --config ./conf/webpack.development.conf.js",
     "build": "webpack --config ./conf/webpack.production.conf.js",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -57,14 +58,9 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run test"
-    }
-  },
   "lint-staged": {
-    "src/*.{ts,tsx,js,jsx}": [
-      "npm lint"
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint"
     ]
   },
   "devDependencies": {
