@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { callApi } from '../../util/api';
+import { callApi } from '../../api/api';
 
 const UserPage = () => {
   useEffect(() => {
