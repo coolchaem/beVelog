@@ -26,7 +26,8 @@ const VelogPage = ({ match }: RouteComponentProps) => {
         <Route path={`${match.url}/series`} component={SeriesPage} />
         <Route path={`${match.url}/about`} component={UserPage} />
       </Switch>
-    </div>);
+    </div>
+  );
 };
 
 export default VelogPage;
