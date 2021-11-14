@@ -8,6 +8,7 @@ const UserPage = () => {
         console.log(response);
       })
   }, []);
+
   return <div>소개 페이지 입니다.</div>;
 };
 

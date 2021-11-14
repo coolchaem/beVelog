@@ -22,12 +22,26 @@ module.exports = {
       jsx: true,
     },
   },
+  env: {
+    'browser': true,
+  },
   rules: {
     quotes: ['error', 'single', { avoidEscape: true }],
     indent: ['error', 2],
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
-    'prettier/prettier': ['error', { singleQuote: true, endOfLine: 'auto' }],
+    'prettier/prettier': [
+      'error',
+      {
+        'singleQuote': true,
+        'semi': true,
+        'useTabs': false,
+        'tabWidth': 2,
+        'printWidth': 100,
+        'arrowParens': 'avoid',
+        'endOfLine': 'auto',
+      }
+    ],
     '@typescript-eslint/no-var-requires': false, // to fix Require statement not part of import statement
-  },
+  }
 };
