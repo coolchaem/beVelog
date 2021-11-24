@@ -16,14 +16,7 @@ const App = () => {
     <>
       <Counter />
       <BrowserRouter>
-        <Header />
         <ul>
-          <li>
-            <Link to="/">트렌딩</Link>
-          </li>
-          <li>
-            <Link to="/recent">최신</Link>
-          </li>
           <li>
             <Link to="/write">새 글 작성</Link>
           </li>
@@ -43,7 +36,7 @@ const App = () => {
         <Route exact path="/" component={HomePage} />
         <Switch>
           <Route path="/@:userId" component={VelogPage} />
-          <Route path="/recent" component={RecentPostsPage} />
+          <Route path="/:mode(trending|recent)" component={HomePage} />
           <Route path="/write" component={WritePage} />
           <Route path="/saves" component={SavesPage} />
           <Route path="/lists" component={ReadingListPage} />

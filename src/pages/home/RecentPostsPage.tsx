@@ -5,7 +5,12 @@ import useRecentPosts from './hooks/useRecentPosts';
 const RecentPostsPage = () => {
   const posts = useRecentPosts();
 
-  return <PostCardGrid posts={posts} />;
+  return (
+    <>
+      <div> 최신 글 페이지 입니다.</div>
+      <PostCardGrid posts={posts} />
+    </>
+  );
 };
 
 export default RecentPostsPage;
