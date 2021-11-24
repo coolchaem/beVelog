@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PostCardGrid from '../../components/molecules/common/PostCardGrid';
-import useRecentPosts from './hooks/useRecentPosts';
+import { API_HOST } from '../../constant';
+import { PartialPost } from '../../types/Post';
+import axios from 'axios';
 
 const RecentPostsPage = () => {
-  const posts = useRecentPosts();
+  const [posts, setPosts] = useState<PartialPost[]>();
+
+  useEffect(() => {
+    axios({ baseURL: API_HOST, url: '/posts' })
+      .then(response => {
+        if (response.data) {
+          console.table(response.data);
+          setPosts(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <>
