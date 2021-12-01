@@ -9,5 +9,6 @@ module.exports = merge(common, {
     // compress : 모든 항목에 대해 gzip 압축 사용
     // contentBase: 정적 파일 제공하려는 경우 필요
     open: true,
+    historyApiFallback: true,
   },
 });
