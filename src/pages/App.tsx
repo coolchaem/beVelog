@@ -2,19 +2,17 @@ import React from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import VelogPage from './velog/VelogPage';
 import ReadingListPage from './readingList/ReadingListPage';
-import RecentPostsPage from './home/RecentPostsPage';
 import SavesPage from './SavesPage';
 import SettingPage from './SettingPage';
 import WritePage from './home/PostPage';
 import HomePage from './home/HomePage';
-import { Counter } from '../components/molecules/Counter';
-import Header from '../components/organisms/main/Header';
+import { useAppSelector } from '../redux/hooks';
+import LoginPage from './LoginPage';
 
 const App = () => {
-  const userId = 'yeojin';
+  const userId = useAppSelector(state => state.userState.username);
   return (
     <>
-      <Counter />
       <BrowserRouter>
         <ul>
           <li>
@@ -41,6 +39,7 @@ const App = () => {
           <Route path="/saves" component={SavesPage} />
           <Route path="/lists" component={ReadingListPage} />
           <Route path="/setting" component={SettingPage} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
       </BrowserRouter>
     </>

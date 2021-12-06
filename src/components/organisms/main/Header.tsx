@@ -2,19 +2,34 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/logo.svg';
+import Button from '../../atoms/Button';
+import { useAppSelector } from '../../../redux/hooks';
+
+const RigthAreaComponent = () => {
+  const userState = useAppSelector(state => state.userState.is_certified);
+  return !userState ? (
+    <Link to="/login">
+      <Button label="로그인" />
+    </Link>
+  ) : (
+    <>
+      <button>새 글 작성</button>
+      <button>User Icon</button>
+      <button>User Menu</button>
+    </>
+  );
+};
 
 const Header = () => {
   return (
     <HeaderStyle>
       <InnerBox>
         <Link to="/">
-          <img src={Logo} />
+          <img src={Logo} alt="logo" />
         </Link>
         <RightArea>
           <button>찾기</button>
-          <button>새 글 작성</button>
-          <button>User Icon</button>
-          <button>User Menu</button>
+          <RigthAreaComponent />
         </RightArea>
       </InnerBox>
     </HeaderStyle>
@@ -29,12 +44,12 @@ const HeaderStyle = styled.div`
 
 const InnerBox = styled.div`
   height: 100%;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 const RightArea = styled.div`
   display: flex;
   align-items: center;
-`
+`;
