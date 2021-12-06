@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useCallback, useState } from 'react';
 import { jsx } from '@emotion/react';
 import Button from '../atoms/Button';

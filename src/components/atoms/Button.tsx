@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
 import { jsx } from '@emotion/react';
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function Button(props: ButtonProps) {

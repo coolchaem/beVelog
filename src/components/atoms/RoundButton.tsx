@@ -5,7 +5,7 @@ import { jsx } from '@emotion/react';
 interface RoundButtonProps {
   label: string;
   onClick: () => void;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 function RoundButton(props: RoundButtonProps) {
@@ -31,7 +31,7 @@ function RoundButton(props: RoundButtonProps) {
         }}
         onClick={props.onClick}
       >
-        <img src={props.imageUrl} alt={props.label} />
+        {props.imageUrl && <img src={props.imageUrl} alt={props.label} />}
       </button>
     </>
   );

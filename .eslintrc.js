@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     node: true, // to fix 'module' is not defined.eslintno-undef
+    browser: true,
   },
   settings: {
     react: {
@@ -22,9 +23,6 @@ module.exports = {
       jsx: true,
     },
   },
-  env: {
-    'browser': true,
-  },
   rules: {
     quotes: ['error', 'single', { avoidEscape: true }],
     indent: ['error', 2],
@@ -33,15 +31,15 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        'singleQuote': true,
-        'semi': true,
-        'useTabs': false,
-        'tabWidth': 2,
-        'printWidth': 100,
-        'arrowParens': 'avoid',
-        'endOfLine': 'auto',
-      }
+        singleQuote: true,
+        semi: true,
+        useTabs: false,
+        tabWidth: 2,
+        printWidth: 100,
+        arrowParens: 'avoid',
+        endOfLine: 'auto',
+      },
     ],
-    '@typescript-eslint/no-var-requires': false, // to fix Require statement not part of import statement
-  }
+    '@typescript-eslint/no-var-requires': 0, // to fix Require statement not part of import statement
+  },
 };

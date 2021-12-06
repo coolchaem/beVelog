@@ -23,5 +23,13 @@ Primary.args = {
   onClick: () => {
     alert('clicked button');
   },
+};
+
+export const ImageButton = Template.bind({});
+ImageButton.args = {
+  label: 'X',
+  onClick: () => {
+    alert('clicked button');
+  },
   imageUrl: 'http://localhost:6060/favicon.ico',
 };
