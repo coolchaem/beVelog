@@ -6,8 +6,8 @@ import Button from '../../atoms/Button';
 import { useAppSelector } from '../../../redux/hooks';
 
 const RigthAreaComponent = () => {
-  const userState = useAppSelector(state => state.userState.is_certified);
-  return !userState ? (
+  const isCertified = useAppSelector(state => state.userState.is_certified);
+  return !isCertified ? (
     <Link to="/login">
       <Button label="로그인" />
     </Link>

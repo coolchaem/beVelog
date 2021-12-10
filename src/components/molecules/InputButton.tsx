@@ -20,17 +20,14 @@ const InputButton = (props: InputButtonProps) => {
   }, [value, props]);
 
   return (
-    <>
-      <div
-        css={{
-          display: 'flex',
-          paddingBottom: '0.25em',
-        }}
-      >
-        <input placeholder={props.inputPlachodler} name="name" onChange={onChange} value={value} />
-        <Button label={props.btnLabel} onClick={onClick} />
-      </div>
-    </>
+    <div
+      css={{
+        display: 'flex',
+      }}
+    >
+      <input placeholder={props.inputPlachodler} name="name" onChange={onChange} value={value} />
+      <Button label={props.btnLabel} onClick={onClick} />
+    </div>
   );
 };
 

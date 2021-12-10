@@ -10,18 +10,18 @@ import { useAppDispatch } from '../../redux/hooks';
 import { User } from '../../types/User';
 
 const LoginForm = () => {
-  const [bRegister, setRegister] = useState<boolean>(true);
+  const [isRegister, setRegister] = useState<boolean>(true);
   const history = useHistory();
   const dispatch = useAppDispatch();
 
   const onRegisterToggle = useCallback(() => {
-    setRegister(!bRegister);
-  }, [bRegister]);
+    setRegister(!isRegister);
+  }, [isRegister]);
 
   const onResult = useCallback(
     (email: string) => {
       axios
-        .post(bRegister ? `${API_HOST}/login` : `${API_HOST}/users`, {
+        .post(isRegister ? `${API_HOST}/login` : `${API_HOST}/users`, {
           user_name: email.split('@')[0],
           email_addr: email,
           velog_name: email.split('@')[0],
@@ -44,21 +44,21 @@ const LoginForm = () => {
           dispatch(loginFail());
         });
     },
-    [bRegister, dispatch, history]
+    [isRegister, dispatch, history]
   );
 
   return (
     <div>
-      <p css={{ fontSize: '1.25em' }}>{bRegister ? '로그인' : '회원가입'}</p>
-      <p css={{ fontSize: '1em' }}> 이메일로 {bRegister ? '로그인' : '회원가입'} </p>
+      <p css={{ fontSize: '1.25em' }}>{isRegister ? '로그인' : '회원가입'}</p>
+      <p css={{ fontSize: '1em' }}> 이메일로 {isRegister ? '로그인' : '회원가입'} </p>
       <InputButton
-        btnLabel={bRegister ? '로그인' : '회원가입'}
+        btnLabel={isRegister ? '로그인' : '회원가입'}
         inputPlachodler="이메일을 입력하세요."
         onResult={onResult}
       />
       <div>
-        <span> {!bRegister ? '계정이 이미 있으신가요?' : '아직 회원이 아니신가요?'} </span>
-        <LabelButton onClick={onRegisterToggle}>{!bRegister ? '로그인' : '회원가입'}</LabelButton>
+        <span> {isRegister ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'} </span>
+        <LabelButton onClick={onRegisterToggle}>{isRegister ? '회원가입' : '로그인'}</LabelButton>
       </div>
     </div>
   );
