@@ -1,14 +1,13 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
 import { jsx } from '@emotion/react';
 
-interface RoundButtonProps {
+interface RoundImageButtonProps {
   label: string;
   onClick: () => void;
   imageUrl?: string;
 }
 
-function RoundImageButton(props: RoundButtonProps) {
+function RoundImageButton(props: RoundImageButtonProps) {
   return (
     <button
       css={{
