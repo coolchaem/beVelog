@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import RoundButton from './RoundButton';
+import RoundImageButton from './RoundImageButton';
 
 export default {
-  title: 'Atoms/RoundButton',
-  component: RoundButton,
+  title: 'Atoms/RoundImageButton',
+  component: RoundImageButton,
   decorators: [
     Story => (
       <div style={{ margin: '3em' }}>
@@ -13,9 +13,9 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof RoundButton>;
+} as ComponentMeta<typeof RoundImageButton>;
 
-const Template: ComponentStory<typeof RoundButton> = args => <RoundButton {...args} />;
+const Template: ComponentStory<typeof RoundImageButton> = args => <RoundImageButton {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

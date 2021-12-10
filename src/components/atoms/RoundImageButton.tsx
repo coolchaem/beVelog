@@ -8,7 +8,7 @@ interface RoundButtonProps {
   imageUrl?: string;
 }
 
-function RoundButton(props: RoundButtonProps) {
+function RoundImageButton(props: RoundButtonProps) {
   return (
     <button
       css={{
@@ -35,4 +35,4 @@ function RoundButton(props: RoundButtonProps) {
   );
 }
 
-export default RoundButton;
+export default RoundImageButton;
