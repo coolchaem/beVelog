@@ -20,14 +20,10 @@ const PostCard = ({ post }: PostCardProps) => {
         <StyledLink to={postUrl}>
           <h4>{post.title}</h4>
           <DiscriptionStyle>
-            <p>
-              {post.short_description}
-            </p>
+            <p>{post.short_description}</p>
           </DiscriptionStyle>
         </StyledLink>
-        <SubInfoStyle>
-          {`${post.released_at} · ${post.comments_count}개의 댓글`}
-        </SubInfoStyle>
+        <SubInfoStyle>{`${post.released_at} · ${post.comments_count}개의 댓글`}</SubInfoStyle>
       </Content>
       <FooterStyle>
         <div className="userinfo">
@@ -36,7 +32,7 @@ const PostCard = ({ post }: PostCardProps) => {
             by <b> {post.user.username} </b>
           </span>
         </div>
-          🖤 {post.likes}
+        🖤 {post.likes}
       </FooterStyle>
     </ContainerStyle>
   );
@@ -83,13 +79,13 @@ const StyledLink = styled(Link)`
 `;
 
 const DiscriptionStyle = styled.div`
-  flex:1;
+  flex: 1;
   p {
     margin: 0;
     word-break: break-word;
     overflow-wrap: break-word;
     font-size: 0.875rem;
-    line-height: 1.5;        
+    line-height: 1.5;
     height: 3.9375rem;
     margin-bottom: 1.5rem;
     text-overflow: ellipsis;
@@ -98,12 +94,12 @@ const DiscriptionStyle = styled.div`
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
-`
+`;
 
 const SubInfoStyle = styled.div`
   font-size: 0.75rem;
   line-height: 1.5;
-`
+`;
 
 const FooterStyle = styled.div`
   padding: 0.625rem 1rem;
@@ -136,4 +132,4 @@ const FooterStyle = styled.div`
       margin-right: 0.5rem;
     }
   }
-`
+`;

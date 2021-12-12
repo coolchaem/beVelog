@@ -1,5 +1,23 @@
 // your app's webpack.config.js
 const custom = require('../conf/webpack.common.conf');
+const path = require("path");
+const fs = require("fs");
+
+function getPackageDir(filepath) {
+  let currDir = path.dirname(require.resolve(filepath));
+  while (true) {
+    if (fs.existsSync(path.join(currDir, "package.json"))) {
+      return currDir;
+    }
+    const { dir, root } = path.parse(currDir);
+    if (dir === root) {
+      throw new Error(
+        `Could not find package.json in the parent directories starting from ${filepath}.`
+      );
+    }
+    currDir = dir;
+  }
+}
 
 module.exports = {
   "stories": [
@@ -18,11 +36,22 @@ module.exports = {
   "core": {
     "builder": "webpack5"
   },
-    webpackFinal: config => {
+  webpackFinal: config => {
     return {
       ...config,
-      resolve: { ...config.resolve },
-      module: { ...config.module }
+      resolve: {
+        ...config.resolve, ...custom.resolve, 
+        alias: {
+          ...custom.resolve.alias,
+          "@emotion/core": getPackageDir("@emotion/react"),
+          "@emotion/styled": getPackageDir("@emotion/styled"),
+          "emotion-theming": getPackageDir("@emotion/react"),
+        },
+      },
+      module: {
+        ...config.module,
+        rules: custom.module.rules,
+      },
     }
   },
 }
