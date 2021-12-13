@@ -8,6 +8,7 @@ import { loginFail, loginSuccess } from '../../redux/reducers/UserSlice';
 import { useHistory } from 'react-router';
 import { useAppDispatch } from '../../redux/hooks';
 import { User } from '../../types/User';
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
   const [isRegister, setRegister] = useState<boolean>(true);
@@ -20,6 +21,7 @@ const LoginForm = () => {
 
   const onResult = useCallback(
     (email: string) => {
+      const toastId = toast('로그인 중입니다.');
       axios
         .post(isRegister ? `${API_HOST}/login` : `${API_HOST}/users`, {
           user_name: email.split('@')[0],
@@ -27,6 +29,17 @@ const LoginForm = () => {
           velog_name: email.split('@')[0],
         })
         .then(response => {
+          toast.update(toastId, {
+            render: '로그인에 성공하였습니다.',
+            type: toast.TYPE.SUCCESS,
+            autoClose: 1000,
+            position: toast.POSITION.TOP_RIGHT,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            pauseOnFocusLoss: false,
+            draggable: true,
+          });
           console.table(response.data);
           const user: User = {
             is_certified: true,
@@ -40,7 +53,17 @@ const LoginForm = () => {
           history.push('/');
         })
         .catch(error => {
-          console.error(error);
+          toast.update(toastId, {
+            render: '존재하지 않는 아이디입니다.',
+            type: toast.TYPE.ERROR,
+            autoClose: 2000,
+            position: toast.POSITION.TOP_RIGHT,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            pauseOnFocusLoss: false,
+            draggable: true,
+          });
           dispatch(loginFail());
         });
     },

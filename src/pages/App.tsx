@@ -8,6 +8,8 @@ import WritePage from './home/PostPage';
 import HomePage from './home/HomePage';
 import { useAppSelector } from '../redux/hooks';
 import LoginPage from './LoginPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const userId = useAppSelector(state => state.userState.username);
@@ -42,6 +44,7 @@ const App = () => {
           <Route path="/login" component={LoginPage} />
         </Switch>
       </BrowserRouter>
+      <ToastContainer />
     </>
   );
 };
