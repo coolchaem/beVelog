@@ -3,68 +3,63 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PartialPost } from '../../../types/Post';
 import TempThumbnail from '../../../assets/thumbnail.jpeg';
-
 interface PostCardProps {
   post: PartialPost;
 }
 
 const PostCard = ({ post }: PostCardProps) => {
-  //usl_slug : post 의 제목에 있는 특수문자, 이모티콘, 공백 처리
   const postUrl = `/@${post.user.username}/${post.url_slug}`;
   return (
-    <ContainerStyle>
-      <StyledLink to={postUrl}>
+    <PostCardLayout>
+      <PostCardLink to={postUrl}>
         <img src={TempThumbnail} width="320px" height="167px" alt={post.title} />
-      </StyledLink>
-      <Content>
-        <StyledLink to={postUrl}>
+      </PostCardLink>
+      <PostCardContentLayout>
+        <PostCardLink to={postUrl}>
           <h4>{post.title}</h4>
-          <DiscriptionStyle>
-            <p>{post.short_description}</p>
-          </DiscriptionStyle>
-        </StyledLink>
-        <SubInfoStyle>{`${post.released_at} · ${post.comments_count}개의 댓글`}</SubInfoStyle>
-      </Content>
-      <FooterStyle>
-        <div className="userinfo">
-          <img src={TempThumbnail} width="20px" height="20px" alt={post.title} />
-          <span>
-            by <b> {post.user.username} </b>
-          </span>
-        </div>
-        🖤 {post.likes}
-      </FooterStyle>
-    </ContainerStyle>
+          <PostCardParagraph>{post.short_description}</PostCardParagraph>
+        </PostCardLink>
+        <PostCardSubInfo>{`${post.released_at} · ${post.comments_count}개의 댓글`}</PostCardSubInfo>
+      </PostCardContentLayout>
+      <PostCardUserInfoLayout>
+        <img src={TempThumbnail} width="20px" height="20px" alt={post.title} />
+        by &nbsp; <b>{post.user.username}</b>
+        <span className="likes">{`🖤 ${post.likes}`}</span>
+      </PostCardUserInfoLayout>
+    </PostCardLayout>
   );
 };
 
 export default PostCard;
 
-const ContainerStyle = styled.div`
+export const PostCardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
   width: 20rem;
   background: white;
+
   border-radius: 4px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
   transition: 0.25s box-shadow ease-in, 0.25s transform ease-in;
+  overflow: hidden;
+
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.08);
   }
-  margin: 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 `;
 
-const Content = styled.div`
-  padding: 1rem;
+export const PostCardContentLayout = styled.div`
   display: flex;
   flex: 1 1 0%;
   flex-direction: column;
+  padding: 1rem;
+
   h4 {
-    font-size: 1rem;
     margin: 0;
     margin-bottom: 0.25rem;
+    font-size: 1rem;
     line-height: 1.5;
     word-break: break-word;
     text-overflow: ellipsis;
@@ -72,64 +67,54 @@ const Content = styled.div`
     overflow: hidden;
   }
 `;
-const StyledLink = styled(Link)`
+const PostCardLink = styled(Link)`
   display: block;
   color: inherit;
   text-decoration: none;
 `;
 
-const DiscriptionStyle = styled.div`
-  flex: 1;
-  p {
-    margin: 0;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    height: 3.9375rem;
-    margin-bottom: 1.5rem;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
+const PostCardParagraph = styled.div`
+  display: -webkit-box;
+  height: 3.9375rem;
+  margin: 0;
+  margin-bottom: 1.5rem;
+
+  font-size: 0.875rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
-const SubInfoStyle = styled.div`
+const PostCardSubInfo = styled.div`
   font-size: 0.75rem;
   line-height: 1.5;
 `;
 
-const FooterStyle = styled.div`
+export const PostCardUserInfoLayout = styled.div`
+  display: flex;
+  align-items: center;
   padding: 0.625rem 1rem;
   border-top: 1px solid lightgray;
-  display: flex;
+
   font-size: 0.75rem;
   line-height: 1.5;
-  align-items: center;
-  justify-content: space-between;
-  .userinfo {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    img {
-      object-fit: cover;
-      border-radius: 50%;
-      width: 1.5rem;
-      height: 1.5rem;
-      display: block;
-      margin-right: 0.5rem;
-    }
+  text-decoration: none;
+  color: inherit;
+
+  img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+    margin-right: 0.5rem;
   }
+
   .likes {
-    display: flex;
-    align-items: center;
-    svg {
-      width: 0.75rem;
-      height: 0.75rem;
-      margin-right: 0.5rem;
-    }
+    margin-left: auto;
   }
 `;
