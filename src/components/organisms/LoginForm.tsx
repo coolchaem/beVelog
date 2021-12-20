@@ -32,7 +32,7 @@ const LoginForm = () => {
             is_certified: true,
             email: response.data.email_addr,
             username: response.data.user_name,
-            id: response.data.user_id,
+            id: response.data.velog_name,
             profile: response.data.profile,
             velogConfig: null,
           };

@@ -1,7 +1,8 @@
 import React from 'react';
+import PostViewer from '../../components/organisms/post/PostViewer';
 
-const WritePage = () => {
-  return <div>새 글 작성 페이지 입니다.</div>;
+const PostPage = () => {
+  return <PostViewer />;
 };
 
-export default WritePage;
+export default PostPage;

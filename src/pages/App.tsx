@@ -4,13 +4,14 @@ import VelogPage from './velog/VelogPage';
 import ReadingListPage from './readingList/ReadingListPage';
 import SavesPage from './SavesPage';
 import SettingPage from './SettingPage';
-import WritePage from './home/PostPage';
 import HomePage from './home/HomePage';
 import { useAppSelector } from '../redux/hooks';
 import LoginPage from './LoginPage';
+import WritePage from './WritePage';
+import PostPage from './home/PostPage';
 
 const App = () => {
-  const userId = useAppSelector(state => state.userState.username);
+  const userId = useAppSelector(state => state.userState.id);
   return (
     <>
       <BrowserRouter>
@@ -33,6 +34,7 @@ const App = () => {
         </ul>
         <Route exact path="/" component={HomePage} />
         <Switch>
+          <Route path="/@:userId/:urlSlug" component={PostPage} />
           <Route path="/@:userId" component={VelogPage} />
           <Route path="/:mode(trending|recent)" component={HomePage} />
           <Route path="/write" component={WritePage} />
