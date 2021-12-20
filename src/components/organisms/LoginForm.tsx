@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 import { useAppDispatch } from '../../redux/hooks';
 import { User } from '../../types/User';
 import { toast } from 'react-toastify';
+import { ErrorToastOption, SuccessToastOption } from '../../styles/Toast';
 
 const LoginForm = () => {
   const [isRegister, setRegister] = useState<boolean>(true);
@@ -31,14 +32,7 @@ const LoginForm = () => {
         .then(response => {
           toast.update(toastId, {
             render: '로그인에 성공하였습니다.',
-            type: toast.TYPE.SUCCESS,
-            autoClose: 1000,
-            position: toast.POSITION.TOP_RIGHT,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            pauseOnFocusLoss: false,
-            draggable: true,
+            ...SuccessToastOption,
           });
           console.table(response.data);
           const user: User = {
@@ -55,14 +49,7 @@ const LoginForm = () => {
         .catch(error => {
           toast.update(toastId, {
             render: '존재하지 않는 아이디입니다.',
-            type: toast.TYPE.ERROR,
-            autoClose: 2000,
-            position: toast.POSITION.TOP_RIGHT,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            pauseOnFocusLoss: false,
-            draggable: true,
+            ...ErrorToastOption,
           });
           dispatch(loginFail());
         });
