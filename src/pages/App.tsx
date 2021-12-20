@@ -9,6 +9,7 @@ import { useAppSelector } from '../redux/hooks';
 import LoginPage from './LoginPage';
 import WritePage from './WritePage';
 import PostPage from './home/PostPage';
+import NotFoundPage from './error/NotFoundPage';
 
 const App = () => {
   const userId = useAppSelector(state => state.userState.id);
@@ -32,8 +33,8 @@ const App = () => {
             <Link to="/setting">설정</Link>
           </li>
         </ul>
-        <Route exact path="/" component={HomePage} />
         <Switch>
+          <Route exact path="/" component={HomePage} />
           <Route path="/@:userId/:urlSlug" component={PostPage} />
           <Route path="/@:userId" component={VelogPage} />
           <Route path="/:mode(trending|recent)" component={HomePage} />
@@ -42,6 +43,8 @@ const App = () => {
           <Route path="/lists" component={ReadingListPage} />
           <Route path="/setting" component={SettingPage} />
           <Route path="/login" component={LoginPage} />
+
+          <Route path="*" exact={true} component={NotFoundPage} />
         </Switch>
       </BrowserRouter>
     </>
