@@ -5,13 +5,14 @@ import InputButton from '../molecules/InputButton';
 import { API_HOST } from '../../constant';
 import axios from 'axios';
 import { loginFail, loginSuccess } from '../../redux/reducers/UserSlice';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../redux/hooks';
 import { User } from '../../types/User';
 
 const LoginForm = () => {
   const [isRegister, setRegister] = useState<boolean>(true);
-  const history = useHistory();
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
 
   const onRegisterToggle = useCallback(() => {
@@ -37,14 +38,14 @@ const LoginForm = () => {
             velogConfig: null,
           };
           dispatch(loginSuccess(user));
-          history.push('/');
+          navigate('/');
         })
         .catch(error => {
           console.error(error);
           dispatch(loginFail());
         });
     },
-    [isRegister, dispatch, history]
+    [isRegister, dispatch, navigate]
   );
 
   return (

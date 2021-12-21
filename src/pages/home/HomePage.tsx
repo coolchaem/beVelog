@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, Route, RouteComponentProps, Router, Switch } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import Header from '../../components/organisms/main/Header';
+import NotFoundPage from '../error/NotFoundPage';
 import RecentPostsPage from './RecentPostsPage';
 import TrendingPostsPage from './TrendingPostsPage';
 
@@ -10,17 +11,16 @@ const HomePage = () => {
       <Header />
       <div>홈 페이지 입니다.</div>
       <ul>
-        <Link to="/">
+        <Link to="">
           <li>트렌딩</li>
         </Link>
-        <Link to="/recent">
+        <Link to="recent">
           <li>최신</li>
         </Link>
       </ul>
-      <Switch>
-        <Route path={['/', '/trending']} component={TrendingPostsPage} exact />
-        <Route path="/recent" component={RecentPostsPage} />
-      </Switch>
+      <Routes>
+        <Route index element={<TrendingPostsPage />} />
+      </Routes>
     </>
   );
 };
