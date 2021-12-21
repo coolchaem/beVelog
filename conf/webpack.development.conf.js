@@ -3,6 +3,14 @@ const common = require('./webpack.common.conf');
 
 module.exports = merge(common, {
   mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
   devServer: {
     port: 9000,
     hot: true, // HMR 기능 활성화
