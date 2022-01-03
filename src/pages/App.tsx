@@ -11,6 +11,8 @@ import WritePage from './WritePage';
 import NotFoundPage from './error/NotFoundPage';
 import TrendingPostsPage from './home/TrendingPostsPage';
 import RecentPostsPage from './home/RecentPostsPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const userId = useAppSelector(state => state.userState.id);
@@ -49,6 +51,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
   );
 };
