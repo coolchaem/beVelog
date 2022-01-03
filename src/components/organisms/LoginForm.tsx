@@ -5,7 +5,7 @@ import InputButton from '../molecules/InputButton';
 import { API_HOST } from '../../constant';
 import axios from 'axios';
 import { loginFail, loginSuccess } from '../../redux/reducers/UserSlice';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../redux/hooks';
 import { User } from '../../types/User';
 import { toast } from 'react-toastify';
@@ -13,7 +13,8 @@ import { ErrorToastOption, SuccessToastOption } from '../../styles/Toast';
 
 const LoginForm = () => {
   const [isRegister, setRegister] = useState<boolean>(true);
-  const history = useHistory();
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
 
   const onRegisterToggle = useCallback(() => {
@@ -39,12 +40,12 @@ const LoginForm = () => {
             is_certified: true,
             email: response.data.email_addr,
             username: response.data.user_name,
-            id: response.data.user_id,
+            id: response.data.velog_name,
             profile: response.data.profile,
             velogConfig: null,
           };
           dispatch(loginSuccess(user));
-          history.push('/');
+          navigate('/');
         })
         .catch(error => {
           toast.update(toastId, {
@@ -54,7 +55,7 @@ const LoginForm = () => {
           dispatch(loginFail());
         });
     },
-    [isRegister, dispatch, history]
+    [isRegister, dispatch, navigate]
   );
 
   return (
