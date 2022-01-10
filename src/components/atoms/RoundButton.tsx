@@ -4,6 +4,7 @@ interface RoundButtonProp {
   text: string;
   color?: string;
   backgroundColor?: string;
+  imgPath?: string;
 }
 
 const RoundButton = (prop: React.PropsWithChildren<RoundButtonProp>) => {
@@ -14,6 +15,7 @@ const RoundButton = (prop: React.PropsWithChildren<RoundButtonProp>) => {
         backgroundColor: prop.backgroundColor || 'graylight',
         height: '2rem',
         fontSize: '1rem',
+        fontWeight: 'bold',
         paddingLeft: '1rem',
         paddingRight: '1rem',
         borderRadius: '1rem',
@@ -30,7 +32,13 @@ const RoundButton = (prop: React.PropsWithChildren<RoundButtonProp>) => {
         },
       }}
     >
-      {prop.children !== undefined && prop.children}
+      {prop.imgPath !== undefined && (
+        <img
+          src={prop.imgPath}
+          css={{ width: '0.75rem', height: '0.75rem', marginRight: '0.75rem' }}
+          alt="RoundButtonImage"
+        />
+      )}
       {prop.text}
     </button>
   );

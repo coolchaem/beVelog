@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import TempThumbnail from '../../../assets/thumbnail.jpeg';
+import TempThumbnail from 'assets/thumbnail.jpeg';
 import RoundButton from './RoundButton';
 
 export default {
@@ -26,5 +26,5 @@ ColorTest.args = {
 export const ChildrenTest = Template.bind({});
 ChildrenTest.args = {
   text: 'BTN',
-  children: <TempThumbnail />,
+  imgPath: TempThumbnail,
 };
