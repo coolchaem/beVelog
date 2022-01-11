@@ -3,15 +3,15 @@ import styled from '@emotion/styled';
 import { keyframes, css } from '@emotion/react';
 import {
   PostCardLayout,
-  PostCardContentLayout,
-  PostCardUserInfoLayout as PostCardUserInfoLayout,
+  PostCardContentBox,
+  PostCardUserInfoBox as PostCardUserInfoBox,
 } from './PostCard';
 
 const PostCardSkeleton = () => {
   return (
     <PostCardSkeletonLayout>
       <SkeletonBox width="100%" height="167px" />
-      <PostCardContentLayout>
+      <PostCardContentBox>
         <SkeletonBox width="100%" marginBottom="0.3rem" />
         <SkeletonBox width="100%" height="5rem" marginBottom="1.5rem" />
         <div className="sub-info">
@@ -22,13 +22,13 @@ const PostCardSkeleton = () => {
             <SkeletonBox width="4rem" />
           </span>
         </div>
-      </PostCardContentLayout>
-      <PostCardUserInfoLayout>
+      </PostCardContentBox>
+      <PostCardUserInfoBox>
         <SkeletonBox width="1.5rem" height="1.5rem" marginRight="0.5rem" />
         <span>
           <SkeletonBox width="6rem" height="1.5rem" />
         </span>
-      </PostCardUserInfoLayout>
+      </PostCardUserInfoBox>
     </PostCardSkeletonLayout>
   );
 };

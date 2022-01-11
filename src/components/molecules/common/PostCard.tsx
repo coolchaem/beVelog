@@ -14,18 +14,18 @@ const PostCard = ({ post }: PostCardProps) => {
       <PostCardLink to={postUrl}>
         <img src={TempThumbnail} width="320px" height="167px" alt={post.title} />
       </PostCardLink>
-      <PostCardContentLayout>
+      <PostCardContentBox>
         <PostCardLink to={postUrl}>
           <h4>{post.title}</h4>
-          <PostCardParagraph>{post.short_description}</PostCardParagraph>
+          <PostCardDescriptionBox>{post.short_description}</PostCardDescriptionBox>
         </PostCardLink>
-        <PostCardSubInfo>{`${post.released_at} · ${post.comments_count}개의 댓글`}</PostCardSubInfo>
-      </PostCardContentLayout>
-      <PostCardUserInfoLayout>
+        <PostCardSubInfoBox>{`${post.released_at} · ${post.comments_count}개의 댓글`}</PostCardSubInfoBox>
+      </PostCardContentBox>
+      <PostCardUserInfoBox>
         <img src={TempThumbnail} width="20px" height="20px" alt={post.title} />
         by &nbsp; <b>{post.user.username}</b>
         <span className="likes">{`🖤 ${post.likes}`}</span>
-      </PostCardUserInfoLayout>
+      </PostCardUserInfoBox>
     </PostCardLayout>
   );
 };
@@ -50,7 +50,7 @@ export const PostCardLayout = styled.div`
   }
 `;
 
-export const PostCardContentLayout = styled.div`
+export const PostCardContentBox = styled.div`
   display: flex;
   flex: 1 1 0%;
   flex-direction: column;
@@ -73,7 +73,7 @@ const PostCardLink = styled(Link)`
   text-decoration: none;
 `;
 
-const PostCardParagraph = styled.div`
+const PostCardDescriptionBox = styled.div`
   display: -webkit-box;
   height: 3.9375rem;
   margin: 0;
@@ -89,12 +89,12 @@ const PostCardParagraph = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-const PostCardSubInfo = styled.div`
+const PostCardSubInfoBox = styled.div`
   font-size: 0.75rem;
   line-height: 1.5;
 `;
 
-export const PostCardUserInfoLayout = styled.div`
+export const PostCardUserInfoBox = styled.div`
   display: flex;
   align-items: center;
   padding: 0.625rem 1rem;
