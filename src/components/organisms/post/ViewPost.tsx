@@ -1,14 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Write } from '../../../types/Write';
 import ViewBody from './ViewBody';
+import { useAppSelector } from '../../../redux/hooks';
 
-interface ViewProps {
-  writeState: Write;
-}
-
-const ViewPost: React.FC<ViewProps> = props => {
-  const { title, body } = props.writeState;
+const ViewPost: React.FC = () => {
+  const { title, body } = useAppSelector(state => state.writeState);
 
   return (
     <ViewBox>

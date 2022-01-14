@@ -7,10 +7,8 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/theme/dracula.css';
 import 'codemirror/addon/scroll/simplescrollbars.css';
-import { useAppSelector } from '../redux/hooks';
 
 const WritePage = () => {
-  const writeState = useAppSelector(state => state.writeState);
   useEffect(() => {
     return () => {
       // 생각해보니 이럴거면 굳이 helmet을 사용하지 않아도 되겠다는 생각이..?
@@ -25,7 +23,7 @@ const WritePage = () => {
         <title>새 글 작성하기 | velog</title>
       </Helmet>
       <WritePost />
-      <ViewPost writeState={writeState} />
+      <ViewPost />
     </WriteViewContainer>
   );
 };
