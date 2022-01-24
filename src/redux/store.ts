@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
+import HomeReducer from './reducers/HomeSlice';
 import UserReducer from './reducers/UserSlice';
+import WriteReducer from './reducers/WriteSlice';
 
 export const store = configureStore({
   reducer: {
     userState: UserReducer,
+    homeState: HomeReducer,
+    writeState: WriteReducer,
   },
 });
 

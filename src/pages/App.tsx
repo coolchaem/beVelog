@@ -4,10 +4,11 @@ import VelogPage from './velog/VelogPage';
 import ReadingListPage from './readingList/ReadingListPage';
 import SavesPage from './SavesPage';
 import SettingPage from './SettingPage';
+import PostPage from './home/PostPage';
+import WritePage from './WritePage';
 import HomePage from './home/HomePage';
 import { useAppSelector } from '../redux/hooks';
 import LoginPage from './LoginPage';
-import WritePage from './WritePage';
 import NotFoundPage from './error/NotFoundPage';
 import TrendingPostsPage from './home/TrendingPostsPage';
 import RecentPostsPage from './home/RecentPostsPage';
@@ -38,10 +39,10 @@ const App = () => {
         </ul>
         <Routes>
           <Route index element={<HomePage />} />
-
-          <Route path="/" element={<HomePage />} />
-          <Route path="trending" element={<TrendingPostsPage />} />
-          <Route path="recent" element={<RecentPostsPage />} />
+          <Route path="/" element={<HomePage />}>
+            <Route path="trending" element={<TrendingPostsPage />} />
+            <Route path="recent" element={<RecentPostsPage />} />
+          </Route>
           <Route path="@:userId/*" element={<VelogPage />} />
           <Route path="write" element={<WritePage />} />
           <Route path="saves" element={<SavesPage />} />
