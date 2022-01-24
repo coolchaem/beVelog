@@ -39,10 +39,10 @@ const App = () => {
         </ul>
         <Routes>
           <Route index element={<HomePage />} />
-
-          <Route path="/" element={<HomePage />} />
-          <Route path="trending" element={<TrendingPostsPage />} />
-          <Route path="recent" element={<RecentPostsPage />} />
+          <Route path="/" element={<HomePage />}>
+            <Route path="trending" element={<TrendingPostsPage />} />
+            <Route path="recent" element={<RecentPostsPage />} />
+          </Route>
           <Route path="@:userId/*" element={<VelogPage />} />
           <Route path="write" element={<WritePage />} />
           <Route path="saves" element={<SavesPage />} />
