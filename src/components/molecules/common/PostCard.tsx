@@ -74,7 +74,6 @@ const PostCardLink = styled(Link)`
 `;
 
 const PostCardDescriptionBox = styled.div`
-  display: -webkit-box;
   height: 3.9375rem;
   margin: 0;
   margin-bottom: 1.5rem;
@@ -85,8 +84,6 @@ const PostCardDescriptionBox = styled.div`
   line-height: 1.5;
   text-overflow: ellipsis;
   overflow: hidden;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 `;
 
 const PostCardSubInfoBox = styled.div`
