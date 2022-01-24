@@ -8,17 +8,17 @@ interface PostCardGridProps {
 }
 const PostCardGrid = ({ posts }: PostCardGridProps) => {
   return (
-    <Container>
+    <PostCardGridLayout>
       {posts?.map((post: PartialPost, index: number) => {
         return <PostCard post={post} key={`${post.title}_${index}`} />;
       })}
-    </Container>
+    </PostCardGridLayout>
   );
 };
 
 export default PostCardGrid;
 
-const Container = styled.div`
+export const PostCardGridLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
