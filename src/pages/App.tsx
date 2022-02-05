@@ -20,23 +20,6 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <ul>
-          <li>
-            <Link to="/write">새 글 작성</Link>
-          </li>
-          <li>
-            <Link to={`/@${userId}`}>MyVelog</Link>
-          </li>
-          <li>
-            <Link to="/saves">임시 글</Link>
-          </li>
-          <li>
-            <Link to="/lists">읽기 목록</Link>
-          </li>
-          <li>
-            <Link to="/setting">설정</Link>
-          </li>
-        </ul>
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="/" element={<HomePage />}>
