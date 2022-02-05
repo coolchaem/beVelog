@@ -35,7 +35,7 @@ const RoundButton = ({
         fontSize,
         fontWeight: 'bold',
         wordBreak: 'keep-all',
-        marginLeft: marginRight ?? '0.875rem',
+        // marginLeft: marginRight ?? '0.875rem',
         marginRight: marginRight ?? '0.875rem',
         paddingLeft: padding,
         paddingRight: padding,

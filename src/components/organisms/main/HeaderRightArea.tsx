@@ -1,13 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../atoms/Button';
 import { useAppSelector } from '../../../redux/hooks';
 import { BsSearch } from 'react-icons/bs';
 import RoundButton from '../../atoms/RoundButton';
+import Menu from '../../molecules/common/Menu';
+import HeaderUserIcon from '../../atoms/HeaderUserIcon';
 
 const HeaderRightArea = () => {
-  const isCertified = useAppSelector(state => state.userState.is_certified);
+  const user = useAppSelector(state => state.userState);
+  const isCertified = user.is_certified;
+  const userId = user.id;
+
+  const [isUserMenuOpened, setIsUserMenuOpened] = useState<boolean>(false);
+  const handleOutSideClick = () => {
+    setIsUserMenuOpened(false);
+  };
+
+  const navigate = useNavigate();
+  const handleNewPostButtonClick = () => {
+    navigate('/write');
+  };
+  const handleLogout = () => {
+    //로그아웃
+  };
+  const handleUserMenuSelect = (value: string) => {
+    if (value === '내 벨로그') {
+      navigate(`/@${userId}`);
+      return;
+    }
+    if (value === '임시 글') {
+      navigate('/saves');
+      return;
+    }
+    if (value === '읽기 목록') {
+      navigate('/lists');
+      return;
+    }
+    if (value === '설정') {
+      navigate('/setting');
+      return;
+    }
+    if (value === '로그아웃') {
+      handleLogout();
+      return;
+    }
+  };
+
   return (
     <HeaderRightAreaBox>
       <SearchLink to="search">
@@ -19,10 +59,17 @@ const HeaderRightArea = () => {
             isBorder={true}
             themeId="darkGray"
             marginRight="1.25rem"
-            label="새 글 작성"
+            text="새 글 작성"
+            onClick={handleNewPostButtonClick}
           />
-          <button>User Icon</button>
-          <button>User Menu</button>
+          <HeaderUserIcon onClick={() => setIsUserMenuOpened(true)} />
+          {isUserMenuOpened && (
+            <Menu
+              onOutSideClick={handleOutSideClick}
+              menus={['내 벨로그', '임시 글', '읽기 목록', '설정', '로그아웃']}
+              onSelect={handleUserMenuSelect}
+            />
+          )}
         </>
       ) : (
         <Link to="/login">
@@ -36,6 +83,7 @@ const HeaderRightArea = () => {
 const HeaderRightAreaBox = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 const SearchLink = styled(Link)`
