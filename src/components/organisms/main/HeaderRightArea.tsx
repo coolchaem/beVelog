@@ -57,7 +57,7 @@ const HeaderRightArea = () => {
         <>
           <RoundButton
             isBorder={true}
-            themeId="darkGray"
+            palleteId="darkGray"
             marginRight="1.25rem"
             text="새 글 작성"
             onClick={handleNewPostButtonClick}

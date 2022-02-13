@@ -14,9 +14,24 @@ import TrendingPostsPage from './home/TrendingPostsPage';
 import RecentPostsPage from './home/RecentPostsPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Global } from '@emotion/react';
+import globalStyles from '../styles/GlobalStyles';
 
 const App = () => {
   const userId = useAppSelector(state => state.userState.id);
+
+  // const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; //boolean
+
+  // function setTheme(theme: 'dark' | 'light') {
+  //   // mode = theme;
+  //   document.body.dataset.theme = theme;
+  // }
+  // setTheme(systemPrefersDark ? 'dark' : 'light');
+
+  // window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+  //   setTheme(e.matches ? 'dark' : 'light');
+  // });
+
   return (
     <>
       <BrowserRouter>
@@ -36,6 +51,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
       <ToastContainer />
+      <Global styles={globalStyles} />
     </>
   );
 };

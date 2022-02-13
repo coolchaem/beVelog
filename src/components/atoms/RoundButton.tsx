@@ -1,22 +1,24 @@
 import React from 'react';
-import { ThemeId } from '../../styles/emotion';
 import theme from '../../styles/Theme';
+import pallete, { PalleteId } from '../../styles/pallete';
 
 interface RoundButtonProp {
   text: string;
-  themeId: ThemeId;
+  palleteId: PalleteId;
   size?: 'SMALL' | 'DEFAULT' | 'LARGE';
   isBorder?: boolean;
-  marginRight: string;
+  marginLeft?: string;
+  marginRight?: string;
   imgPath?: string;
   onClick?: (e: React.MouseEvent) => void;
 }
 
 const RoundButton = ({
   text,
-  themeId,
+  palleteId,
   size = 'DEFAULT',
   isBorder = false,
+  marginLeft,
   marginRight,
   imgPath,
   onClick,
@@ -25,28 +27,27 @@ const RoundButton = ({
   const padding = size === 'SMALL' ? '0.75rem' : size === 'DEFAULT' ? '1rem' : '2rem';
   const fontSize = size === 'SMALL' ? '0.875rem' : size === 'DEFAULT' ? '1rem' : '1.5rem';
   const borderRadius = size === 'SMALL' ? '0.75rem' : size === 'DEFAULT' ? '1rem' : '1.5rem';
-
   return (
     <button
       css={{
         height,
-        color: isBorder ? theme[themeId].background : theme[themeId].color,
-        backgroundColor: isBorder ? 'white' : `${theme[themeId].background}`,
+        color: isBorder ? theme.bg_element5 : pallete[palleteId].color,
+        backgroundColor: isBorder ? theme.bg_element2 : `${pallete[palleteId].background}`,
         fontSize,
         fontWeight: 'bold',
         wordBreak: 'keep-all',
-        // marginLeft: marginRight ?? '0.875rem',
-        marginRight: marginRight ?? '0.875rem',
+        marginLeft,
+        marginRight,
         paddingLeft: padding,
         paddingRight: padding,
         outline: 'none',
-        border: isBorder ? `1px solid ${theme[themeId].background}` : 'none',
+        border: isBorder ? `1px solid ${theme.bg_element5}` : 'none',
         borderRadius: borderRadius,
         cursor: 'pointer',
         transition: '0.125s all ease-in',
         '&:hover': {
-          background: `${theme[themeId].background}`,
-          color: 'white',
+          background: `${theme.bg_element5}`,
+          color: `${theme.button_text}`,
         },
         '&:focus': {
           boxShadow: '0px 2px 12px #00000030',
