@@ -167,4 +167,6 @@ const theme = (Object.keys(lightThemeVariables) as Array<keyof ThemeVariables>).
   {} as ThemeVariables
 );
 
+export type ThemeMode = 'light' | 'dark';
+
 export default theme;
