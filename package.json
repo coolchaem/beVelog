@@ -10,7 +10,6 @@
     "@types/node": "^12.20.33",
     "@types/react": "^17.0.36",
     "@types/react-dom": "^17.0.9",
-    "camelcase": "^6.3.0",
     "code-mirror-themes": "^1.0.0",
     "codemirror": "^5.65.0",
     "dotenv": "^10.0.0",
