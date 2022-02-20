@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import VelogPage from './velog/VelogPage';
 import ReadingListPage from './readingList/ReadingListPage';
@@ -7,7 +7,7 @@ import SettingPage from './SettingPage';
 import PostPage from './home/PostPage';
 import WritePage from './WritePage';
 import HomePage from './home/HomePage';
-import { useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import LoginPage from './LoginPage';
 import NotFoundPage from './error/NotFoundPage';
 import TrendingPostsPage from './home/TrendingPostsPage';
@@ -16,22 +16,45 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Global } from '@emotion/react';
 import globalStyles from '../styles/GlobalStyles';
+import { enableDarkMode, enableLightMode, setSystemThemeMode } from '../redux/reducers/ThemeSlice';
+import { useEffect } from 'react';
 
 const App = () => {
-  const userId = useAppSelector(state => state.userState.id);
+  const dispatch = useAppDispatch();
+  const themeMode = useAppSelector(state => state.themeState);
 
-  // const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; //boolean
+  useEffect(() => {
+    const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-  // function setTheme(theme: 'dark' | 'light') {
-  //   // mode = theme;
-  //   document.body.dataset.theme = theme;
-  // }
-  // setTheme(systemPrefersDark ? 'dark' : 'light');
+    const systemPrefersDark = darkMediaQuery.matches;
+    dispatch(setSystemThemeMode(systemPrefersDark ? 'dark' : 'light'));
 
-  // window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-  //   setTheme(e.matches ? 'dark' : 'light');
-  // });
+    darkMediaQuery.addEventListener('change', e => {
+      dispatch(setSystemThemeMode(e.matches ? 'dark' : 'light'));
+    });
+  }, [dispatch]);
 
+  useEffect(() => {
+    if (themeMode.userThemeMode !== 'default') {
+      document.body.dataset.theme = themeMode.userThemeMode;
+    }
+  }, [themeMode]);
+
+  // 쿠키에 저장된 사용자 선호 테마를 store 에 저장, 재접속 할때 유지
+  const loadTheme = useCallback(() => {
+    const theme = localStorage.getItem('theme');
+    if (!theme) return;
+    if (theme === 'dark') {
+      dispatch(enableDarkMode());
+    } else {
+      dispatch(enableLightMode());
+    }
+    document.body.dataset.theme = theme;
+  }, [dispatch]);
+
+  useEffect(() => {
+    loadTheme();
+  }, [loadTheme]);
   return (
     <>
       <BrowserRouter>

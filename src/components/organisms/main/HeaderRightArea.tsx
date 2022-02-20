@@ -7,6 +7,7 @@ import { BsSearch } from 'react-icons/bs';
 import RoundButton from '../../atoms/RoundButton';
 import Menu from '../../molecules/common/Menu';
 import HeaderUserIcon from '../../atoms/HeaderUserIcon';
+import ThemeToggleButton from '../../atoms/ThemeToggleButton';
 
 const HeaderRightArea = () => {
   const user = useAppSelector(state => state.userState);
@@ -50,6 +51,7 @@ const HeaderRightArea = () => {
 
   return (
     <HeaderRightAreaBox>
+      <ThemeToggleButton />
       <SearchLink to="search">
         <BsSearch />
       </SearchLink>
@@ -83,7 +85,6 @@ const HeaderRightArea = () => {
 const HeaderRightAreaBox = styled.div`
   display: flex;
   align-items: center;
-  position: relative;
 `;
 
 const SearchLink = styled(Link)`
