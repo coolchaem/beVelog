@@ -18,7 +18,7 @@ const PostHeader = (prop: PostHeaderProps) => {
         <span> · </span>
         <span>{prop.date || '2021년 12월 20일'}</span>
       </UserInfoBox>
-      <Thumnail src={TempThumbnail} />
+      <Thumnail alt="Post Thumbnail" src={TempThumbnail} />
     </PostHeaderBox>
   );
 };
@@ -47,6 +47,8 @@ const UserInfoBox = styled.div`
 
 const Thumnail = styled.img`
   margin: 3rem auto;
+  width: 100%;
+  height: 100%;
   max-width: 100%;
 `;
 
