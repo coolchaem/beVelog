@@ -35,11 +35,16 @@ module.exports = {
       {
         // file-loader : 모듈의 내용을 그대로 복사해 dist 폴더 밑에 복사본을 만들고
         // 모듈을 사용하는 쪽에 해당 모듈의 경로를 넘겨줌
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        test: /\.(png|jpg|jpeg|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]',
         },
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },

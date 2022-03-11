@@ -9,7 +9,7 @@ const Header = () => {
     <HeaderStyle>
       <InnerBox>
         <Link to="/">
-          <img src={Logo} alt="logo" />
+          <Logo />
         </Link>
         <HeaderRightArea />
       </InnerBox>
