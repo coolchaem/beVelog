@@ -5,6 +5,7 @@ import PostLikeShareButton from './PostLikeShareButton';
 
 interface PostBodyProp {
   body: string;
+  likeCount: number;
 }
 
 const PostBody = (prop: PostBodyProp) => {
@@ -110,7 +111,7 @@ const PostBody = (prop: PostBodyProp) => {
   );
   return (
     <PostLayout>
-      <PostLikeShareButton />
+      <PostLikeShareButton likeCount={prop.likeCount} liked={false} />
       <PostBodyBox>{testBody || <ViewBody body={prop.body} />}</PostBodyBox>
     </PostLayout>
   );

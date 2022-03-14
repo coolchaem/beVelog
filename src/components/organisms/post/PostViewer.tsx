@@ -28,7 +28,7 @@ const PostViewer = () => {
   return (
     <div>
       <PostHeader title={post.title} date={post.released_at} userId={userId || ''} />
-      <PostBody body={post.body} />
+      <PostBody body={post.body} likeCount={post.likes} />
     </div>
   );
 };
