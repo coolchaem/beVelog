@@ -85,6 +85,7 @@ const HeaderRightArea = () => {
 const HeaderRightAreaBox = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 const SearchLink = styled(Link)`
