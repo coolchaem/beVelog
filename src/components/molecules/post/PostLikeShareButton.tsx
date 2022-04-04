@@ -7,19 +7,14 @@ import LikeIcon from '../../../assets/likeIcon.svg';
 interface PostLikeSharebuttonProps {
   likeCount: number;
   liked: boolean;
+  onLikeToggle: () => void;
 }
 
 const PostLikeShareButton = (prop: PostLikeSharebuttonProps) => {
-  const [liked, setLiked] = useState(prop.liked);
-
-  const handleLikeToggle = () => {
-    setLiked(!liked);
-  };
-
   return (
     <PostLikeShareStickyBox top={10} left={1}>
-      <CircleButton onClick={handleLikeToggle} active={liked}>
-        <LikeIcon fill={liked ? 'red' : 'gray'} />
+      <CircleButton onClick={prop.onLikeToggle} active={prop.liked}>
+        <LikeIcon fill={prop.liked ? 'red' : 'gray'} />
       </CircleButton>
       <div>{prop.likeCount}</div>
       <CircleButton />
@@ -28,8 +23,11 @@ const PostLikeShareButton = (prop: PostLikeSharebuttonProps) => {
 };
 
 const PostLikeShareStickyBox = styled(StickyComponent)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem;
-  height: 6.5rem;
+  height: 100%;
   flex-direction: column;
   @media (max-width: 1024px) {
     display: none;

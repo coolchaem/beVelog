@@ -5,7 +5,7 @@ import TempThumbnail from '../../../assets/thumbnail.jpeg';
 
 interface PostHeaderProps {
   title: string;
-  userId: string;
+  userName: string;
   date: string;
 }
 
@@ -14,7 +14,7 @@ const PostHeader = (prop: PostHeaderProps) => {
     <PostHeaderBox>
       <PostHeaderTitle>{prop.title}</PostHeaderTitle>
       <UserInfoBox>
-        <Link to={`/@${prop.userId}`}>{prop.userId}</Link>
+        <Link to={`/@${prop.userName}`}>{prop.userName}</Link>
         <span> · </span>
         <span>{prop.date || '2021년 12월 20일'}</span>
       </UserInfoBox>
