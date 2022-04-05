@@ -66,7 +66,6 @@ const MenuLayout = styled.ul`
 
   list-style: none;
   padding-left: 0px;
-  margin: 0px;
   li {
     cursor: pointer;
     font-weight: 600;
@@ -75,6 +74,9 @@ const MenuLayout = styled.ul`
     &.active {
       color: rgb(18, 184, 134);
     }
+  }
+  li:hover {
+    background-color: #f8f9fa;
   }
   li + li {
     border-top: 1px solid rgb(241, 243, 245);

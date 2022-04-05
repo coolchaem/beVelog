@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 
 import { store } from '../src/redux/store';
 
+import '../conf/__mocks__/matchMediaMock';
+
 describe('my function or component', () => {
   test('does the following', () => {});
 });
