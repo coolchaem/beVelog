@@ -67,7 +67,9 @@ const App = () => {
           <Route path="@:userId/*" element={<VelogPage />} />
           <Route path="write" element={<WritePage />} />
           <Route path="saves" element={<SavesPage />} />
-          <Route path="lists" element={<ReadingListPage />} />
+          <Route path="lists" element={<ReadingListPage />}>
+            <Route path=":type" element={<ReadingListPage />} />
+          </Route>
           <Route path="setting" element={<SettingPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
