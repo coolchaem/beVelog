@@ -16,7 +16,7 @@ const PostLikeShareButton = (prop: PostLikeSharebuttonProps) => {
       <CircleButton onClick={prop.onLikeToggle} active={prop.liked}>
         <LikeIcon fill={prop.liked ? 'red' : 'gray'} />
       </CircleButton>
-      <div>{prop.likeCount}</div>
+      <div>{prop.likeCount === undefined ? '-' : prop.likeCount}</div>
       <CircleButton />
     </PostLikeShareStickyBox>
   );
