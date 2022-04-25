@@ -39,7 +39,25 @@ const PostViewer = () => {
   }, [navigate, urlSlug, user.username, userId]);
 
   const handleLikeToggle = () => {
-    setLiked(!liked);
+    try {
+      const userName = user.username;
+      if (!userName) {
+        console.log('login 기능 보수 중^^, 필요하다면 const 값을 주세여');
+        return;
+      }
+
+      axios
+        .post(`${API_HOST}/${userName}/${liked ? 'unlike' : 'like'}/${post.id}/`)
+        .then(response => {
+          post.likes = response.data.likes;
+          setLiked(response.data.liked);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
