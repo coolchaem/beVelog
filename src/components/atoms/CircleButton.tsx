@@ -2,10 +2,12 @@ import React from 'react';
 
 interface CircleButtonProps {
   active?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 const CircleButton = (prop: React.PropsWithChildren<CircleButtonProps>) => {
   return (
-    <div
+    <button
+      onClick={prop.onClick}
       css={{
         height: '3rem',
         width: '3rem',
@@ -23,7 +25,7 @@ const CircleButton = (prop: React.PropsWithChildren<CircleButtonProps>) => {
       }}
     >
       {prop.children}
-    </div>
+    </button>
   );
 };
 

@@ -18,9 +18,9 @@ const StickyComponent = (props: React.PropsWithChildren<StickyProps>) => {
 };
 
 const StickyBlock = styled.div<StickyProps>`
-  position: fixed;
-  top: ${props => props.top}px;
-  left: ${props => props.left}px;
+  position: sticky;
+  top: ${props => props.top}rem;
+  left: ${props => props.left}rem;
   border: 1px solid rgb(241, 243, 245);
   border-radius: 2rem;
   align-items: center;
