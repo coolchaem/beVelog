@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_HOST } from '../../../constant';
-import { Post } from '../../../types/Post';
+import { SinglePost } from '../../../types/Post';
 import ViewBody from '../../organisms/post/ViewBody';
 import PostHeader from '../../molecules/post/PostHeader';
 import PostLikeShareButton from '../../molecules/post/PostLikeShareButton';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../redux/hooks';
 
 const PostViewer = () => {
-  const [post, setPost] = useState<Post>({} as Post);
+  const [post, setPost] = useState<SinglePost>({} as SinglePost);
   const [liked, setLiked] = useState<boolean>(false);
   const { userId, urlSlug } = useParams<{ userId: string; urlSlug: string }>();
 
@@ -19,28 +19,16 @@ const PostViewer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios({
-      baseURL: API_HOST,
-      url: `/@${userId}/${urlSlug}`,
-    })
+    axios
+      .get(`${API_HOST}/@${userId}/${urlSlug}/`, {
+        params: {
+          loginUserName: user.username,
+        },
+      })
       .then(response => {
         const _post = response.data;
         setPost(_post);
-
-        if (user.username !== '') {
-          // 서버 api 수정까지 연달아 요청(post.id 의존성)
-          // API 수정 예정: post + liked join (= SinglePost type)
-          axios({
-            baseURL: API_HOST,
-            url: `/${user.username}/liked/${_post.id}`,
-          })
-            .then(reponse => {
-              setLiked(reponse.data.length !== 0);
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        }
+        setLiked(_post.liked);
       })
       .catch(error => {
         console.error(error);
