@@ -2,7 +2,7 @@ import { Interpolation, Theme, css } from '@emotion/react';
 import { darkTheme, lightTheme } from './Theme';
 
 const globalStyles: Interpolation<Theme> = css`
-  body {
+  * {
     margin: 0;
     padding: 0;
     font-family: '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', 'Apple SD Gothic Neo',
@@ -11,10 +11,8 @@ const globalStyles: Interpolation<Theme> = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
-  }
-
-  * {
-    box-sizing: inherit;
+    outline: none;
+    border: none;
   }
 
   body {

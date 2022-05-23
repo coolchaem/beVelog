@@ -33,10 +33,10 @@ export const execToolbarCmd = (cmd: string) => {
           selectedText.slice(-2) === '**'
         ) {
           codeMirror.replaceSelection(`${selectedText.slice(2, -2)}`);
-          // setSelection(0, -4);
+          setSelection(0, -4);
         } else {
           codeMirror.replaceSelection(`**${codeMirror.getSelection().trim()}**`);
-          // setSelection(0, 4);
+          setSelection(0, 4);
         }
       }
       break;
