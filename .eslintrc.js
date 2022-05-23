@@ -10,7 +10,7 @@ module.exports = {
   },
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'react-hooks', 'deprecation'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -19,6 +19,9 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
@@ -41,5 +44,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-var-requires': 0, // to fix Require statement not part of import statement
+    'deprecation/deprecation': 'error',
   },
 };
