@@ -3,11 +3,13 @@ import styled from '@emotion/styled';
 import WriteContent from './content/WriteContent';
 import WriteHeader from './header/WriteHeader';
 import SubmitArea from './submit/SubmitArea';
+import Toolbar from './toolbar/Toolbar';
 
 const WritePost = () => {
   return (
     <WritePostBox>
       <WriteHeader />
+      <Toolbar />
       <WriteContent />
       <SubmitArea />
     </WritePostBox>

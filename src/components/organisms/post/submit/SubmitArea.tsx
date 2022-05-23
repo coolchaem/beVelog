@@ -1,11 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
 import { Flip, toast } from 'react-toastify';
 import { useAppSelector } from '../../../../redux/hooks';
-import { initialState } from '../../../../redux/reducers/WriteSlice';
+import { initialState, setWriteState } from '../../../../redux/reducers/WriteSlice';
 import axios from 'axios';
 import { API_HOST } from '../../../../constant';
+import { v4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { Write } from '../../../../types/Write';
 
 const showToast = (msg: string) => {
   toast(msg, {
@@ -33,6 +36,7 @@ const goToElem = (target: HTMLElement | null) => {
 
 const SubmitArea = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userState = useAppSelector(state => state.userState);
   const writeState = useAppSelector(state => state.writeState);
 
@@ -50,7 +54,7 @@ const SubmitArea = () => {
         is_temp: false,
       };
       axios
-        .post(API_HOST + '/write', { command: 'new_post', post: newData })
+        .post(API_HOST + '/write', newData)
         .then(data => {
           console.log('Good', data);
         })
@@ -60,9 +64,37 @@ const SubmitArea = () => {
     }
   }, [writeState, userState]);
 
+  const tempSave = useCallback(() => {
+    if (API_HOST) {
+      const newData = {
+        id: writeState.postData?.id || 'NONE ID ERROR',
+        title: writeState.title || '',
+        body: writeState.body || '',
+        is_private: false,
+        is_markdown: true,
+        user: {
+          username: userState.username || 'youngjewoo',
+        },
+        is_temp: false,
+      };
+      axios
+        .post(API_HOST + '/write/tempsave', newData)
+        .then(data => {
+          console.log('TEMP SAVED!', data);
+        })
+        .catch(err => {
+          console.error('TEMP SAVE FAILED!', err);
+        });
+    }
+  }, [writeState, userState]);
+
+  // 나가기
   const goHome = useCallback(() => navigate('/', { replace: true }), [navigate]);
+
+  // 출간하기
   const handlePublish = useCallback(() => {
     if (writeState.title === initialState.title) {
+      console.log(initialState);
       const titleElem = document.getElementById('beVelog-titleElem');
       showToast('제목을 입력하세요.');
       goToElem(titleElem);
@@ -78,6 +110,7 @@ const SubmitArea = () => {
     }
   }, [writeState, createNewPost]);
 
+  // 임시 저장
   const handleTempSave = useCallback(() => {
     if (writeState.title === initialState.title) {
       const titleElem = document.getElementById('beVelog-titleElem');
@@ -91,9 +124,37 @@ const SubmitArea = () => {
         goToElem(bodyElem);
       }
     } else {
-      // 임시 저장
+      // 제목과 본문 내용이 유효한 경우에만 임시 저장
+      tempSave();
     }
-  }, [writeState]);
+  }, [writeState, tempSave]);
+
+  // 나가기 시 state 초기화
+  // const clearState = useCallback(() => {
+  //   const newState: Write = { ...initialState };
+  //   dispatch(setWriteState(newState));
+  // }, [dispatch]);
+
+  useEffect(() => {
+    // post id 초기화
+    if (writeState.postData?.id === undefined) {
+      const newState: Write = {
+        postData: {
+          id: v4(),
+        },
+      };
+      dispatch(setWriteState(newState));
+    }
+  });
+
+  useEffect(() => {
+    // 30초마다 임시 저장 호출
+    const itvId = setInterval(handleTempSave, 30000);
+    return () => {
+      clearTimeout(itvId);
+    };
+  }, [handleTempSave]);
+
   return (
     <SubmitBox>
       <ExitButton onClick={goHome}>

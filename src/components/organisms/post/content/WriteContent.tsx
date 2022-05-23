@@ -4,6 +4,7 @@ import { setWriteState } from '../../../../redux/reducers/WriteSlice';
 import { useAppSelector } from '../../../../redux/hooks';
 import { Write } from '../../../../types/Write';
 import { useDispatch } from 'react-redux';
+import { execToolbarCmd } from '../toolbar/toolbarHandler';
 import styled from '@emotion/styled';
 
 const WriteContent = () => {
@@ -30,12 +31,29 @@ const WriteContent = () => {
     }
   }, []); // eslint-disable-line
 
+  const downHandler = (e: React.KeyboardEvent): void => {
+    if (e.metaKey || e.ctrlKey) {
+      switch (e.key) {
+        case 'b':
+          execToolbarCmd('bold');
+          break;
+        case 'i':
+          execToolbarCmd('italic');
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   return (
     <WriteBox
+      id="main_editor"
       className="editor"
       ref={ref => {
         editor = ref;
       }}
+      onKeyDown={downHandler}
     ></WriteBox>
   );
 };

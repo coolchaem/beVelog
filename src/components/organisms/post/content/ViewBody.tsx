@@ -33,6 +33,16 @@ const ViewBody: React.FC<ViewBodyProps> = props => {
 
 const ViewBodyBox = styled.div`
   font-size: 1.25rem;
+
+  blockquote {
+    margin: 2rem 0px;
+    border-left: 4px solid var(--primary2);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: #f8f9fa;
+    padding: 1rem 1rem 1rem 2rem;
+    color: #212529;
+  }
 `;
 
 export default ViewBody;
