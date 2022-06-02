@@ -18,6 +18,7 @@ import { Global } from '@emotion/react';
 import globalStyles from '../styles/GlobalStyles';
 import { enableDarkMode, enableLightMode, setSystemThemeMode } from '../redux/reducers/ThemeSlice';
 import { useEffect } from 'react';
+import LoginRedirectPage from './login/LoginRedirectPage';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -59,8 +60,8 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<HomePage />} />
           <Route path="/" element={<HomePage />}>
+            <Route index element={<HomePage />} />
             <Route path="trending" element={<TrendingPostsPage />} />
             <Route path="recent" element={<RecentPostsPage />} />
           </Route>
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="lists" element={<ReadingListPage />} />
           <Route path="setting" element={<SettingPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="oauth/redirect" element={<LoginRedirectPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
