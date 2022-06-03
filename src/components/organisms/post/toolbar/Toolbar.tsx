@@ -3,6 +3,25 @@ import styled from '@emotion/styled';
 import { execToolbarCmd } from './toolbarHandler';
 
 const Toolbar = () => {
+  const imgUploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const editor = document.querySelector('.CodeMirror');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const codeMirror = editor.CodeMirror as CodeMirror.Editor;
+    const str =
+      '![](https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg)';
+    if (codeMirror.getSelection() === '') {
+      const file = e.target?.files?.item(0);
+      if (file) {
+        const fileUrl = URL.createObjectURL(file);
+        codeMirror.replaceSelection(`![](${fileUrl})`);
+        return;
+      }
+      codeMirror.replaceSelection(str);
+    } else {
+      // console.log('block');
+    }
+  };
   return (
     <ToolbarBox>
       <ToolbarBtn onClick={() => execToolbarCmd('h1')}>
@@ -75,7 +94,7 @@ const Toolbar = () => {
           <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
         </svg>
       </ToolbarBtn>
-      <ToolbarBtn>
+      <ToolbarBtn onClick={() => execToolbarCmd('link')}>
         <svg
           fill="#868e96"
           strokeWidth="0"
@@ -87,7 +106,7 @@ const Toolbar = () => {
           <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path>
         </svg>
       </ToolbarBtn>
-      <ToolbarBtn>
+      <ToolbarBtn onClick={() => execToolbarCmd('image')}>
         <svg
           fill="#868e96"
           strokeWidth="0"
@@ -98,8 +117,9 @@ const Toolbar = () => {
         >
           <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
         </svg>
+        <ToolbarBtnInput id="image_upload_input" type="file" onChange={imgUploadHandler} />
       </ToolbarBtn>
-      <ToolbarBtn>
+      <ToolbarBtn onClick={() => execToolbarCmd('codeblock')}>
         <svg
           fill="#868e96"
           strokeWidth="0"
@@ -136,6 +156,10 @@ const ToolbarBtn = styled.button`
   &:hover {
     background: lightgrey;
   }
+`;
+
+const ToolbarBtnInput = styled.input`
+  display: none;
 `;
 
 const Separator = styled.div`

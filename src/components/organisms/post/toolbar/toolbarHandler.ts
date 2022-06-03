@@ -1,3 +1,5 @@
+/* eslint-disable */
+// indent rule이 switch-case 문에서 에러 발생 시킴
 import CodeMirror from 'codemirror';
 
 export const execToolbarCmd = (cmd: string) => {
@@ -7,6 +9,26 @@ export const execToolbarCmd = (cmd: string) => {
   const codeMirror = editor.CodeMirror as CodeMirror.Editor;
   const from = codeMirror.getCursor('from');
   const to = codeMirror.getCursor('to');
+
+  const setHeaderCmd = (hdrString: string) => {
+    const lineToken = codeMirror.getTokenAt(codeMirror.getCursor());
+    const lineTokenAry = lineToken.string.split(' ');
+    let newString = lineToken.string;
+    if (lineTokenAry[0].includes('#')) {
+      const sharpStr = lineTokenAry.shift();
+      newString = lineTokenAry.join(' ');
+      if (sharpStr !== hdrString) {
+        newString = `${hdrString} ${newString}`;
+      }
+    } else {
+      newString = `${hdrString} ${newString}`;
+    }
+    codeMirror.replaceRange(
+      `${newString}`,
+      { ch: lineToken.start, line: codeMirror.getCursor().line },
+      { ch: lineToken.end, line: codeMirror.getCursor().line }
+    );
+  };
 
   const setSelection = (fromCh: number, toCh: number) => {
     const newFrom: CodeMirror.Position = {
@@ -79,84 +101,16 @@ export const execToolbarCmd = (cmd: string) => {
       }
       break;
     case 'h1':
-      {
-        if (codeMirror.getSelection() === '') {
-          const lineToken = codeMirror.getTokenAt(codeMirror.getCursor());
-          const lineTokenAry = lineToken.string.split(' ');
-          let pureString = lineToken.string;
-          if (lineTokenAry[0].includes('#')) {
-            lineTokenAry.shift();
-            pureString = lineTokenAry.join(' ');
-          }
-          codeMirror.replaceRange(
-            `# ${pureString}`,
-            { ch: lineToken.start, line: codeMirror.getCursor().line },
-            { ch: lineToken.end, line: codeMirror.getCursor().line }
-          );
-        } else {
-          codeMirror.replaceSelection(`# ${codeMirror.getSelection().trim()}`);
-        }
-      }
+      setHeaderCmd('#');
       break;
     case 'h2':
-      {
-        if (codeMirror.getSelection() === '') {
-          const lineToken = codeMirror.getTokenAt(codeMirror.getCursor());
-          const lineTokenAry = lineToken.string.split(' ');
-          let pureString = lineToken.string;
-          if (lineTokenAry[0].includes('#')) {
-            lineTokenAry.shift();
-            pureString = lineTokenAry.join(' ');
-          }
-          codeMirror.replaceRange(
-            `## ${pureString}`,
-            { ch: lineToken.start, line: codeMirror.getCursor().line },
-            { ch: lineToken.end, line: codeMirror.getCursor().line }
-          );
-        } else {
-          codeMirror.replaceSelection(`## ${codeMirror.getSelection().trim()}`);
-        }
-      }
+      setHeaderCmd('##');
       break;
     case 'h3':
-      {
-        if (codeMirror.getSelection() === '') {
-          const lineToken = codeMirror.getTokenAt(codeMirror.getCursor());
-          const lineTokenAry = lineToken.string.split(' ');
-          let pureString = lineToken.string;
-          if (lineTokenAry[0].includes('#')) {
-            lineTokenAry.shift();
-            pureString = lineTokenAry.join(' ');
-          }
-          codeMirror.replaceRange(
-            `### ${pureString}`,
-            { ch: lineToken.start, line: codeMirror.getCursor().line },
-            { ch: lineToken.end, line: codeMirror.getCursor().line }
-          );
-        } else {
-          codeMirror.replaceSelection(`### ${codeMirror.getSelection().trim()}`);
-        }
-      }
+      setHeaderCmd('###');
       break;
     case 'h4':
-      {
-        if (codeMirror.getSelection() === '') {
-          const lineToken = codeMirror.getTokenAt(codeMirror.getCursor());
-          const lineTokenAry = lineToken.string.split(' ');
-          let pureString = lineToken.string;
-          if (lineTokenAry[0].includes('#')) {
-            lineTokenAry.shift();
-            pureString = lineTokenAry.join(' ');
-          }
-          codeMirror.replaceRange(
-            `#### ${pureString}`,
-            { ch: lineToken.start, line: codeMirror.getCursor().line },
-            { ch: lineToken.end, line: codeMirror.getCursor().line }
-          );
-        } else {
-          codeMirror.replaceSelection(`#### ${codeMirror.getSelection().trim()}`);
-        }
-      }
+      setHeaderCmd('####');
       break;
     case 'quote':
       {
@@ -181,6 +135,17 @@ export const execToolbarCmd = (cmd: string) => {
           }
         } else {
           codeMirror.replaceSelection(`> ${codeMirror.getSelection().trim()}`);
+        }
+      }
+      break;
+    case 'link':
+      // console.log('LINK');
+      break;
+    case 'image':
+      {
+        const inputElem = document.getElementById('image_upload_input');
+        if (inputElem) {
+          inputElem.click();
         }
       }
       break;

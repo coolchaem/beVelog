@@ -43,6 +43,13 @@ const ViewBodyBox = styled.div`
     padding: 1rem 1rem 1rem 2rem;
     color: #212529;
   }
+
+  img {
+    display: block;
+    margin: 3rem auto;
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export default ViewBody;

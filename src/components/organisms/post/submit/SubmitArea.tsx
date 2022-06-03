@@ -56,10 +56,10 @@ const SubmitArea = () => {
       axios
         .post(API_HOST + '/write', newData)
         .then(data => {
-          console.log('Good', data);
+          // console.log('Good', data);
         })
         .catch(err => {
-          console.log('BAD', err);
+          // console.log('BAD', err);
         });
     }
   }, [writeState, userState]);
@@ -80,7 +80,7 @@ const SubmitArea = () => {
       axios
         .post(API_HOST + '/write/tempsave', newData)
         .then(data => {
-          console.log('TEMP SAVED!', data);
+          // console.log('TEMP SAVED!', data);
         })
         .catch(err => {
           console.error('TEMP SAVE FAILED!', err);
@@ -94,7 +94,6 @@ const SubmitArea = () => {
   // 출간하기
   const handlePublish = useCallback(() => {
     if (writeState.title === initialState.title) {
-      console.log(initialState);
       const titleElem = document.getElementById('beVelog-titleElem');
       showToast('제목을 입력하세요.');
       goToElem(titleElem);

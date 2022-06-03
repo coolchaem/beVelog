@@ -1,3 +1,6 @@
+/* eslint-disable */
+// indent rule이 switch-case 문에서 에러 발생 시킴
+
 import React, { useEffect } from 'react';
 import CodeMirror from 'codemirror';
 import { setWriteState } from '../../../../redux/reducers/WriteSlice';
