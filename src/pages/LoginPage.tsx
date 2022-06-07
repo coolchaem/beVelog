@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import LoginForm from '../components/organisms/LoginForm';
 import kakaoLogin from '../assets/kakao_login_small.png';
-
-const kakoClientId = '5aa736f2202b78af54a0878a77bd24e7';
-const kakaoAuthUrl = 'https://kauth.kakao.com/oauth/authorize';
-const kakaoRedirectUrl = 'http://localhost:9000/oauth/redirect';
+import axios from 'axios';
+import { API_HOST } from '../constant';
 
 const LoginPage = () => {
+  const handleClick = useCallback(() => {
+    axios.get(`${API_HOST}/login/kakao`).then(response => {
+      console.log(response.data);
+      window.location.assign(response.data);
+    });
+  }, []);
+
+  const handleKeyDown = useCallback(
+    event => {
+      if (event.key === 'Enter') {
+        handleClick();
+      }
+    },
+    [handleClick]
+  );
+
   return (
     <>
       <LoginForm />
-      <a
-        href={`${kakaoAuthUrl}?response_type=code&client_id=${kakoClientId}&redirect_uri=${kakaoRedirectUrl}`}
-      >
+      <div onClick={handleClick} onKeyDown={handleKeyDown} role="button" tabIndex={0}>
         <img src={kakaoLogin} alt="login_kakao" />
-      </a>
+      </div>
     </>
   );
 };
