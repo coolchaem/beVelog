@@ -1,16 +1,15 @@
 import React from 'react';
-import { useAppSelector } from '../../../redux/hooks';
 import styled from '@emotion/styled';
-import WriteContent from './WriteContent';
-import WriteHeader from './WriteHeader';
-import SubmitArea from './SubmitArea';
+import WriteContent from './content/WriteContent';
+import WriteHeader from './header/WriteHeader';
+import SubmitArea from './submit/SubmitArea';
+import Toolbar from './toolbar/Toolbar';
 
 const WritePost = () => {
-  const writeState = useAppSelector(state => state.writeState);
-
   return (
     <WritePostBox>
       <WriteHeader />
+      <Toolbar />
       <WriteContent />
       <SubmitArea />
     </WritePostBox>
@@ -24,7 +23,7 @@ const WritePostBox = styled.div`
   flex-direction: column;
   font-size: 18px;
   min-width: 0px;
-  padding-bottom: 64px;
+  height: 100vh;
   position: relative;
 `;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ViewBody from './ViewBody';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppSelector } from '../../../../redux/hooks';
 
 const ViewPost: React.FC = () => {
   const { title, body } = useAppSelector(state => state.writeState);
@@ -26,6 +26,8 @@ const ViewBox = styled.div`
   min-width: 0px;
   padding: 48px;
   position: relative;
+  max-height: 975px;
+  overflow-y: scroll;
 `;
 
 export default ViewPost;

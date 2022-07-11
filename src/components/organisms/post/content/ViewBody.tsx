@@ -4,7 +4,7 @@ import { marked } from 'marked';
 import Prism from 'prismjs';
 
 interface ViewBodyProps {
-  body: string;
+  body?: string;
 }
 
 const ViewBody: React.FC<ViewBodyProps> = props => {
@@ -24,11 +24,32 @@ const ViewBody: React.FC<ViewBodyProps> = props => {
     });
   });
 
-  return <ViewBodyBox dangerouslySetInnerHTML={{ __html: marked.parse(body) }}></ViewBodyBox>;
+  return body ? (
+    <ViewBodyBox dangerouslySetInnerHTML={{ __html: marked.parse(body) }}></ViewBodyBox>
+  ) : (
+    <></>
+  );
 };
 
 const ViewBodyBox = styled.div`
   font-size: 1.25rem;
+
+  blockquote {
+    margin: 2rem 0px;
+    border-left: 4px solid var(--primary2);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: #f8f9fa;
+    padding: 1rem 1rem 1rem 2rem;
+    color: #212529;
+  }
+
+  img {
+    display: block;
+    margin: 3rem auto;
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export default ViewBody;

@@ -1,9 +1,13 @@
+/* eslint-disable */
+// indent rule이 switch-case 문에서 에러 발생 시킴
+
 import React, { useEffect } from 'react';
 import CodeMirror from 'codemirror';
-import { setBody } from '../../../redux/reducers/WriteSlice';
-import { useAppSelector } from '../../../redux/hooks';
-import { Write } from '../../../types/Write';
+import { setWriteState } from '../../../../redux/reducers/WriteSlice';
+import { useAppSelector } from '../../../../redux/hooks';
+import { Write } from '../../../../types/Write';
 import { useDispatch } from 'react-redux';
+import { execToolbarCmd } from '../toolbar/toolbarHandler';
 import styled from '@emotion/styled';
 
 const WriteContent = () => {
@@ -23,50 +27,54 @@ const WriteContent = () => {
       });
       codeMirror.on('change', doc => {
         const newState: Write = {
-          ...writeState,
           body: doc.getValue(),
         };
-        dispatch(setBody(newState));
+        dispatch(setWriteState(newState));
       });
     }
   }, []); // eslint-disable-line
 
+  const downHandler = (e: React.KeyboardEvent): void => {
+    if (e.metaKey || e.ctrlKey) {
+      switch (e.key) {
+        case 'b':
+          execToolbarCmd('bold');
+          break;
+        case 'i':
+          execToolbarCmd('italic');
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   return (
     <WriteBox
+      id="main_editor"
       className="editor"
       ref={ref => {
         editor = ref;
       }}
+      onKeyDown={downHandler}
     ></WriteBox>
   );
 };
 
 const WriteBox = styled.div`
-  flex: 1;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  @media (max-width:1023px) {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+  .CodeMirror {
+    line-height: 1.5;
+    height: 706px;
+    overflow-x: hidden;
   }
   .CodeMirror-lines {
-    padding-left: 1rem;
+    padding-left: 44px;
     padding-right: 1rem;
     @media (max-width:1023px) {
-      padding-left: 0.75rem;
       padding-right: 0.75rem;
     }
   }
-  flex: 1;
-  font-family: "initial";
-  height: auto; // font-family: 'D2 coding';
-  font-family: "Inconsolata", "D2 Coding", sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.5;
-  @media (max-width:1023px) {
-    font-size: 1rem;
-    line-height: 1.25;
-  }
+  
   .cm-header {
     line-height: 1.75;
   }
@@ -106,6 +114,13 @@ const WriteBox = styled.div`
       font-style: italic;
     }
   }
+  flex: 1;
+  font-family: "Inconsolata", "D2 Coding", sans-serif;
+  font-size: 1.125rem;
+  height: auto;
+  line-height: 1.5;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 `;
 

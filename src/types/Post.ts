@@ -101,14 +101,14 @@ export interface SinglePost {
   user: {
     id: string;
     username: string;
-    profile: {
+    profile?: {
       id: string;
       display_name: string;
       thumbnail: string;
       short_bio: string;
       profile_links: ProfileLinks;
     };
-    velog_config: {
+    velog_config?: {
       title: string;
     };
   };

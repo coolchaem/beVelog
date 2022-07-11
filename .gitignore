@@ -24,4 +24,7 @@ yarn-error.log*
 
 # etc
 /src/react-app-env.d.ts
+<<<<<<< HEAD
+
+#IDE
 .vscode
