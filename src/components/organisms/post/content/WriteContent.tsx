@@ -75,19 +75,20 @@ const WriteBox = styled.div`
     }
   }
   
-  .cm-header {
-    line-height: 1.75;
-  }
   .cm-header-1 {
+    font-weight: bold;
     font-size: 2.25rem;
   }
   .cm-header-2 {
+    font-weight: bold;
     font-size: 1.6825rem;
   }
   .cm-header-3 {
+    font-weight: bold;
     font-size: 1.3125rem;
   }
   .cm-header-4 {
+    font-weight: bold;
     font-size: 1.125rem;
   }
   &.cm-s-default {
@@ -113,6 +114,24 @@ const WriteBox = styled.div`
       color: $oc-gray-5;
       font-style: italic;
     }
+  }
+  .cm-italic {
+    font-style: italic;
+  }
+  .cm-strike {
+    text-decoration:line-through
+  }
+  .cm-quote {
+    color: #9d9d9f;
+    font-style: italic;
+  }
+  .cm-link {
+    color: #50a14f;
+    font-style: italic;
+  }
+  .cm-comment {
+    color: #9d9d9f;
+    font-style: italic;
   }
   flex: 1;
   font-family: "Inconsolata", "D2 Coding", sans-serif;

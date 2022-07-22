@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_HOST } from '../../../constant';
 import { SinglePost } from '../../../types/Post';
-import ViewBody from '../../organisms/post/ViewBody';
+import ViewBody from '../../organisms/post/content/ViewBody';
 import PostHeader from '../../molecules/post/PostHeader';
 import PostLikeShareButton from '../../molecules/post/PostLikeShareButton';
 import { useNavigate } from 'react-router-dom';
