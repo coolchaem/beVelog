@@ -4,7 +4,7 @@ import PostCardSkeleton from './PostCardSkeleton';
 
 const PostCardGridSkeleton = () => {
   return (
-    <PostCardGridLayout>
+    <PostCardGridLayout id="p_skeleton">
       {Array.from({ length: 8 }).map((_, i) => (
         <PostCardSkeleton key={i} />
       ))}

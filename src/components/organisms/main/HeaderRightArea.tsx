@@ -75,12 +75,31 @@ const HeaderRightArea = () => {
         </>
       ) : (
         <Link to="/login">
-          <Button label="로그인" />
+          <LoginBtn>로그인</LoginBtn>
         </Link>
       )}
     </HeaderRightAreaBox>
   );
 };
+
+const LoginBtn = styled.button`
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  word-break: keep-all;
+  background-color: rgb(18, 184, 134);
+  color: white;
+  transition: all 0.125s ease-in 0s;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(18, 186, 150);
+  }
+`;
 
 const HeaderRightAreaBox = styled.div`
   display: flex;
