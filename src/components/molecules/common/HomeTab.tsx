@@ -1,15 +1,39 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { MdTrendingUp, MdAccessTime, MdArrowDropDown, MdMoreVert } from 'react-icons/md';
 import Menu from './Menu';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { select, TimeFrame, timeFrameMap } from '../../../redux/reducers/HomeSlice';
+import { adjustHdrWidth, adjustHomeTabWidth } from './PostCardGrid';
+
+const resizeTabHdr = () => {
+  const gridElem = document.getElementById('p_grid');
+  const gridSkelElem = document.getElementById('p_skeleton');
+  if (gridElem) {
+    if (gridElem.children.length > 0) {
+      adjustHomeTabWidth(gridElem);
+      adjustHdrWidth(gridElem);
+    } else if (gridElem.children.length === 0 && gridSkelElem) {
+      adjustHomeTabWidth(gridSkelElem);
+      adjustHdrWidth(gridSkelElem);
+    }
+  }
+};
 
 const HomeTab = () => {
   const location = useLocation();
   const isRecent = location.pathname === '/recent';
   const [isExtraMenuOpen, setIsExtraMenuOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    resizeTabHdr();
+
+    // Resize 할 때마다 너비 체크
+    window.addEventListener('resize', () => {
+      resizeTabHdr();
+    });
+  }, []);
 
   const selectedTimeFrame = useAppSelector(state => state.homeState.timeFrame);
   const dispatch = useAppDispatch();
@@ -43,51 +67,57 @@ const HomeTab = () => {
   };
 
   return (
-    <HomeTabLayout>
-      <HomeTabLeftAreaBox>
-        <HomeTabLinkAreaBox>
-          <HomeTabLink to="">
-            <MdTrendingUp />
-            트렌딩
-          </HomeTabLink>
-          <HomeTabLink to="recent">
-            <MdAccessTime />
-            최신
-          </HomeTabLink>
-          {/* <Indicator style={props}></Indicator> */}
-        </HomeTabLinkAreaBox>
-        {!isRecent && (
-          <>
-            <TimeFrameDropdownButton
-              onClick={() => {
-                setIsTimeFrameDropdownOpen(!isTimeFrameDropdownOpen);
-              }}
-            >
-              {timeFrameMap[selectedTimeFrame]}
-              <MdArrowDropDown />
-            </TimeFrameDropdownButton>
-            {isTimeFrameDropdownOpen && (
-              <Menu
-                menus={Object.values(timeFrameMap)}
-                selectedMenu={timeFrameMap[selectedTimeFrame]}
-                onSelect={handleTimeFrameDropdownSelect}
-                onOutSideClick={handleOutSideClick}
-              />
-            )}
-          </>
+    <HomeTabBox>
+      <HomeTabLayout id="home_tab_layout">
+        <HomeTabLeftAreaBox>
+          <HomeTabLinkAreaBox>
+            <HomeTabLink to="">
+              <MdTrendingUp />
+              트렌딩
+            </HomeTabLink>
+            <HomeTabLink to="recent">
+              <MdAccessTime />
+              최신
+            </HomeTabLink>
+            {/* <Indicator style={props}></Indicator> */}
+          </HomeTabLinkAreaBox>
+          {!isRecent && (
+            <>
+              <TimeFrameDropdownButton
+                onClick={() => {
+                  setIsTimeFrameDropdownOpen(!isTimeFrameDropdownOpen);
+                }}
+              >
+                {timeFrameMap[selectedTimeFrame]}
+                <MdArrowDropDown />
+              </TimeFrameDropdownButton>
+              {isTimeFrameDropdownOpen && (
+                <Menu
+                  menus={Object.values(timeFrameMap)}
+                  selectedMenu={timeFrameMap[selectedTimeFrame]}
+                  onSelect={handleTimeFrameDropdownSelect}
+                  onOutSideClick={handleOutSideClick}
+                />
+              )}
+            </>
+          )}
+        </HomeTabLeftAreaBox>
+        <MoreButton onClick={handleMoreButtonClick} />
+        {isExtraMenuOpen && (
+          <Menu
+            menus={['공지사항', '태그 목록', '서비스 정책', 'Slack', '문의']}
+            onSelect={handleExtraMenuSelect}
+            onOutSideClick={handleExtraMenuOutSideClick}
+          />
         )}
-      </HomeTabLeftAreaBox>
-      <MoreButton onClick={handleMoreButtonClick} />
-      {isExtraMenuOpen && (
-        <Menu
-          menus={['공지사항', '태그 목록', '서비스 정책', 'Slack', '문의']}
-          onSelect={handleExtraMenuSelect}
-          onOutSideClick={handleExtraMenuOutSideClick}
-        />
-      )}
-    </HomeTabLayout>
+      </HomeTabLayout>
+    </HomeTabBox>
   );
 };
+const HomeTabBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const HomeTabLayout = styled.div`
   margin-top: 1.5rem;
